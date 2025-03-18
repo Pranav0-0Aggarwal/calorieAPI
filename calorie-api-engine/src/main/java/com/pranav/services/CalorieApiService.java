@@ -25,7 +25,7 @@ public class CalorieApiService {
         this.mealDAO = mealDAO;
     }
 
-    private String getTextResponse(TextRequest textRequest) {
+    public String getTextResponse(TextRequest textRequest) {
         List<Meal> mealsEaten = textRequestService.getMealsFromText(textRequest);
 
         for (Meal meal : mealsEaten) {
@@ -59,7 +59,12 @@ public class CalorieApiService {
         return textRequestService.simpleResponse(textRequest);
     }
 
-    private String getImageResponse(ImageRequest imageRequest) {
+    public void addFood(Food food){
+        foodDAO.addFood(food);
+        log.info("{}food is added", food);
+    }
+
+    public String getImageResponse(ImageRequest imageRequest) {
         //placeholder
         return "This API isn't working for now";
     }
