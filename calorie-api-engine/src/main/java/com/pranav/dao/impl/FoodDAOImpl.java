@@ -29,6 +29,11 @@ public class FoodDAOImpl implements FoodDAO {
     }
 
     @Override
+    public List<Food> getAllFoods() {
+        return List.of();
+    }
+
+    @Override
     public List<Food> getSimilarFoods(String searchQuery) {
         return List.of();
     }
