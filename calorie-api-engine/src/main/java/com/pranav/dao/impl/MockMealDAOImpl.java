@@ -1,10 +1,13 @@
 package com.pranav.dao.impl;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.pranav.dao.MealDAO;
+import com.pranav.macros.Macros;
 import com.pranav.meal.Meal;
 import com.pranav.meal.MealResponse;
 import lombok.extern.slf4j.Slf4j;
+import net.sourceforge.argparse4j.impl.type.StringArgumentType;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,6 +17,7 @@ import java.util.Map;
 
 
 @Slf4j
+@Singleton
 public class MockMealDAOImpl implements MealDAO {
 
     private final Map<String, MealResponse> mockMealsStore;
@@ -50,4 +54,22 @@ public class MockMealDAOImpl implements MealDAO {
         log.info("Retrieved {} meals between {} and {}", filteredMeals.size(), start, end);
         return filteredMeals;
     }
+
+    @Override
+    public Macros getMacrosBetween(LocalDateTime start, LocalDateTime end) {
+        Macros totalMacros = new Macros(0, 0, 0, 0, 0);
+
+        List<MealResponse> meals = getMealsBetween(start, end);
+
+        for (MealResponse meal : meals) {
+            Macros mealMacros = meal.getMacros();
+            totalMacros.setCalorie(totalMacros.getCalorie() + mealMacros.getCalorie());
+            totalMacros.setProtein(totalMacros.getProtein() + mealMacros.getProtein());
+            totalMacros.setCarbs(totalMacros.getCarbs() + mealMacros.getCarbs());
+            totalMacros.setFats(totalMacros.getFats() + mealMacros.getFats());
+            totalMacros.setSodium(totalMacros.getSodium() + mealMacros.getSodium());
+        }
+        return totalMacros;
+    }
+
 }

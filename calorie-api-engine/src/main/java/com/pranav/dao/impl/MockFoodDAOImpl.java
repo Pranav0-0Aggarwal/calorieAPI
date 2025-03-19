@@ -1,6 +1,7 @@
 package com.pranav.dao.impl;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.pranav.dao.FoodDAO;
 import com.pranav.dao.SearchMapper;
 import com.pranav.food.Food;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
+@Singleton
 public class MockFoodDAOImpl implements FoodDAO {
 
     //mapping of Id, with Food

@@ -1,6 +1,7 @@
 package com.pranav.dao.impl;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.pranav.dao.SearchMapper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@Singleton
 public class MockSearchMapperImpl implements SearchMapper {
     private final Map<String, String> map;
 
@@ -38,5 +40,10 @@ public class MockSearchMapperImpl implements SearchMapper {
             log.warn("Food '{}' is not found in the search mapping.", foodName);
         }
         return mapping;
+    }
+
+    @Override
+    public Map<String, String> getAllMappings(){
+        return map;
     }
 }

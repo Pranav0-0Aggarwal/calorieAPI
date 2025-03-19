@@ -3,6 +3,7 @@ package com.pranav.services;
 import com.google.inject.Inject;
 import com.pranav.dao.FoodDAO;
 import com.pranav.dao.MealDAO;
+import com.pranav.dao.SearchMapper;
 import com.pranav.food.Food;
 import com.pranav.macros.Macros;
 import com.pranav.meal.Meal;
@@ -10,8 +11,11 @@ import com.pranav.meal.MealResponse;
 import com.pranav.request.ImageRequest;
 import com.pranav.request.TextRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.tuple.Pair;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
@@ -19,12 +23,14 @@ public class CalorieApiService {
     private final TextRequestService textRequestService;
     private final FoodDAO foodDAO;
     private final MealDAO mealDAO;
+    private final SearchMapper searchMapper;
 
     @Inject
-    public CalorieApiService(TextRequestService textRequestService, FoodDAO foodDAO, MealDAO mealDAO) {
+    public CalorieApiService(TextRequestService textRequestService, FoodDAO foodDAO, MealDAO mealDAO, SearchMapper searchMapper) {
         this.textRequestService = textRequestService;
         this.foodDAO = foodDAO;
         this.mealDAO = mealDAO;
+        this.searchMapper = searchMapper;
     }
 
     public String getTextResponse(TextRequest textRequest) {
@@ -58,20 +64,48 @@ public class CalorieApiService {
             mealDAO.addMeal(mealResponse);
         }
 
-        return textRequestService.simpleResponse(textRequest);
+        Pair<LocalDateTime, LocalDateTime> interval = textRequestService.getInterval(textRequest);
+        LocalDateTime start = interval.getLeft();
+        LocalDateTime end = interval.getRight();
+
+        Macros consumedMacros = mealDAO.getMacrosBetween(start, end);
+        String updatedText = textBuilder(consumedMacros, start, end, textRequest);
+
+        log.info(updatedText, "{} is the query after build");
+        TextRequest modifiedTextRequest = TextRequest.builder()
+                .userId(textRequest.getUserId())
+                .text(updatedText)
+                .build();
+
+        return textRequestService.simpleResponse(modifiedTextRequest);
     }
 
-    public void addFood(Food food){
+    public void addFood(Food food) {
         foodDAO.addFood(food);
-        log.info("{}food is added", food);
+        log.info("{} food is added", food);
     }
 
-    public List<Food> getAllFood(){
+    public List<Food> getAllFood() {
         return foodDAO.getAllFoods();
     }
 
     public String getImageResponse(ImageRequest imageRequest) {
-        //placeholder
+        // Placeholder response
         return "This API isn't working for now";
+    }
+
+    private String textBuilder(Macros macros, LocalDateTime start, LocalDateTime end, TextRequest textRequest) {
+        return macros.toString() + " were consumed in interval starting from " +
+                start.toString() + " - " + end.toString() +
+                ". This was given for context, and the following is the query textual: " +
+                textRequest.getText() + ". Generate a Response for the given Query, don't forget to add Macros, and make it mostly focussed on Health";
+    }
+
+    public List<MealResponse> getAllMeals() {
+        return mealDAO.getMeals();
+    }
+
+    public Map<String,String> getAllMappings(){
+        return searchMapper.getAllMappings();
     }
 }

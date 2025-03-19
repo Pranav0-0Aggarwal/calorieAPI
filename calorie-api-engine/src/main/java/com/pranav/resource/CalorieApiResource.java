@@ -51,4 +51,20 @@ public class CalorieApiResource {
     public Response getAllFood(){
         return Response.ok(calorieApiService.getAllFood()).build();
     }
+
+    @Path("/allMeals")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getAllMeals(){
+        return Response.ok(calorieApiService.getAllMeals()).build();
+    }
+
+    @Path("/AllMappings")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getAllMappings(){
+        return Response.ok(calorieApiService.getAllMappings()).build();
+    }
+
+
 }
