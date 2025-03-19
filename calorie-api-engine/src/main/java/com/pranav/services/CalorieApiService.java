@@ -66,6 +66,10 @@ public class CalorieApiService {
         log.info("{}food is added", food);
     }
 
+    public List<Food> getAllFood(){
+        return foodDAO.getAllFoods();
+    }
+
     public String getImageResponse(ImageRequest imageRequest) {
         //placeholder
         return "This API isn't working for now";

@@ -13,7 +13,7 @@ public class TextRequestService {
     merko chahiye, a ML
      */
 
-    List<Meal> getMealsFromText(TextRequest textRequest) {
+    public List<Meal> getMealsFromText(TextRequest textRequest) {
         List<Meal> meals = new ArrayList<>();
 
         //what i want to do with this function is to call LLAMA.CPP server, and get meals from the text
@@ -21,13 +21,13 @@ public class TextRequestService {
         return meals;
     }
 
-    String getClosestFoodId(TextRequest textRequest, List<Meal> meals){
+    public String getClosestFoodId(TextRequest textRequest, List<Meal> meals){
         //
 
         return "";
     }
 
-    String simpleResponse(TextRequest textRequest){
-        return "";
+    public String simpleResponse(TextRequest textRequest){
+        return "ApI is working";
     }
 }

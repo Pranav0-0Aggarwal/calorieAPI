@@ -11,6 +11,7 @@ import com.pranav.dao.impl.MockFoodDAOImpl;
 import com.pranav.dao.impl.MockMealDAOImpl;
 import com.pranav.dao.impl.MockSearchMapperImpl;
 import com.pranav.dao.impl.MockUserDAOImpl;
+import com.pranav.resource.CalorieApiResource;
 
 public class CoreModule extends AbstractModule {
     @Override

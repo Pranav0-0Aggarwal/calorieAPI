@@ -1,6 +1,7 @@
 package com.pranav;
 
 import com.pranav.guice.CoreModule;
+import com.pranav.resource.CalorieApiResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -28,7 +29,7 @@ public class App extends Application<AppConfig> {
     @Override
     public void initialize(Bootstrap<AppConfig> bootstrap) {
         guiceBundle = GuiceBundle.builder()
-                .modules(new CoreModule())  // Register Guice Module
+                .modules(new CoreModule())
                 .build();
         bootstrap.addBundle(guiceBundle);
         bootstrap.addBundle(swaggerBundle());
@@ -36,6 +37,7 @@ public class App extends Application<AppConfig> {
 
     @Override
     public void run(AppConfig configuration, Environment environment) {
-        System.out.println("Starting Calorie API...");
+        environment.jersey().register(guiceBundle.getInjector().getInstance(CalorieApiResource.class));
+
     }
 }
