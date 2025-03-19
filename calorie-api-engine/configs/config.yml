@@ -1,0 +1,22 @@
+serviceName: calorie-tracker
+
+server:
+  maxThreads: 128
+  minThreads: 128
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+  applicationContextPath: /
+  requestLog:
+    appenders:
+      - type: console
+        timeZone: IST
+
+
+swagger:
+  resourcePackage: com.pranav.resource
+  title: Calorie Tracker APIs
+  description: APIs for adding foods

@@ -63,6 +63,11 @@ public class MockFoodDAOImpl implements FoodDAO {
         return new ArrayList<>(mockFoodStore.values());
     }
 
+    @Override
+    public List<Food> getSimilarFoods(String searchQuery) {
+        return List.of();
+    }
+
     private Food closestFood(String foodName) {
         return new Food();
     }
