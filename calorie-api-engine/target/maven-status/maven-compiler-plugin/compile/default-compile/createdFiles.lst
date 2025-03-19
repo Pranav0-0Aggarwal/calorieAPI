@@ -13,6 +13,7 @@ com/pranav/dao/impl/MockMealDAOImpl.class
 com/pranav/App$1.class
 com/pranav/App.class
 com/pranav/dao/impl/MockFoodDAOImpl.class
+com/pranav/guice/CoreModule.class
 com/pranav/dao/impl/FoodDAOImpl.class
 com/pranav/services/ImageRequestService.class
 com/pranav/resource/CalorieApiResource.class

@@ -1,5 +1,6 @@
 package com.pranav.services;
 
+import com.google.inject.Inject;
 import com.pranav.dao.FoodDAO;
 import com.pranav.dao.MealDAO;
 import com.pranav.food.Food;
@@ -19,6 +20,7 @@ public class CalorieApiService {
     private final FoodDAO foodDAO;
     private final MealDAO mealDAO;
 
+    @Inject
     public CalorieApiService(TextRequestService textRequestService, FoodDAO foodDAO, MealDAO mealDAO) {
         this.textRequestService = textRequestService;
         this.foodDAO = foodDAO;

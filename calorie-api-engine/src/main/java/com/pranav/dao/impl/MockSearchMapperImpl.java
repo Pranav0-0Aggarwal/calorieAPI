@@ -1,5 +1,6 @@
 package com.pranav.dao.impl;
 
+import com.google.inject.Inject;
 import com.pranav.dao.SearchMapper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,6 +11,7 @@ import java.util.Map;
 public class MockSearchMapperImpl implements SearchMapper {
     private final Map<String, String> map;
 
+    @Inject
     public MockSearchMapperImpl() {
         this.map = new HashMap<>();
     }

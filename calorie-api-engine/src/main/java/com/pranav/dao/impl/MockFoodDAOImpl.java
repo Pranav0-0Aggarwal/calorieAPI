@@ -1,5 +1,6 @@
 package com.pranav.dao.impl;
 
+import com.google.inject.Inject;
 import com.pranav.dao.FoodDAO;
 import com.pranav.dao.SearchMapper;
 import com.pranav.food.Food;
@@ -17,6 +18,7 @@ public class MockFoodDAOImpl implements FoodDAO {
     private final Map<String, Food> mockFoodStore;
     private final SearchMapper searchMapper;
 
+    @Inject
     public MockFoodDAOImpl(SearchMapper searchMapper) {
         this.searchMapper = searchMapper;
         this.mockFoodStore = new HashMap<>();

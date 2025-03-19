@@ -1,6 +1,7 @@
 package com.pranav.resource;
 
 
+import com.google.inject.Inject;
 import com.pranav.food.Food;
 import com.pranav.request.TextRequest;
 import com.pranav.services.CalorieApiService;
@@ -17,6 +18,7 @@ import javax.ws.rs.core.Response;
 public class CalorieApiResource {
     private final CalorieApiService calorieApiService;
 
+    @Inject
     public CalorieApiResource(CalorieApiService calorieApiService) {
         this.calorieApiService = calorieApiService;
     }

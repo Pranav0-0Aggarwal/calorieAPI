@@ -1,5 +1,6 @@
 package com.pranav.dao.impl;
 
+import com.google.inject.Inject;
 import com.pranav.dao.MealDAO;
 import com.pranav.meal.Meal;
 import com.pranav.meal.MealResponse;
@@ -17,6 +18,7 @@ public class MockMealDAOImpl implements MealDAO {
 
     private final Map<String, MealResponse> mockMealsStore;
 
+    @Inject
     public MockMealDAOImpl() {
         mockMealsStore = new HashMap<>();
     }

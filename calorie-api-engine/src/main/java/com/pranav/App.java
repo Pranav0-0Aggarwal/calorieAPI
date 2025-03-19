@@ -1,12 +1,15 @@
 package com.pranav;
 
+import com.pranav.guice.CoreModule;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import in.vectorpro.dropwizard.swagger.SwaggerBundle;
 import in.vectorpro.dropwizard.swagger.SwaggerBundleConfiguration;
+import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 public class App extends Application<AppConfig> {
+    private GuiceBundle guiceBundle;
 
     SwaggerBundle<AppConfig> swaggerBundle() {
         return new SwaggerBundle<AppConfig>() {
@@ -24,6 +27,10 @@ public class App extends Application<AppConfig> {
 
     @Override
     public void initialize(Bootstrap<AppConfig> bootstrap) {
+        guiceBundle = GuiceBundle.builder()
+                .modules(new CoreModule())  // Register Guice Module
+                .build();
+        bootstrap.addBundle(guiceBundle);
         bootstrap.addBundle(swaggerBundle());
     }
 

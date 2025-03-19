@@ -1,5 +1,6 @@
 package com.pranav.dao.impl;
 
+import com.google.inject.Inject;
 import com.pranav.dao.UserDAO;
 import com.pranav.user.User;
 
@@ -9,6 +10,7 @@ import java.util.Map;
 public class MockUserDAOImpl implements UserDAO {
     Map<String, User> mockUsersStore;
 
+    @Inject
     public MockUserDAOImpl() {
         mockUsersStore = new HashMap<>();
     }

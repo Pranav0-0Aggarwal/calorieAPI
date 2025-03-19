@@ -1,5 +1,6 @@
 package com.pranav.dao.impl;
 
+import com.google.inject.Inject;
 import com.pranav.api.ApiKey;
 import com.pranav.dao.ApiKeyDAO;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import java.util.Map;
 public class MockApiKeyDAOImpl implements ApiKeyDAO {
     private final Map<String, ApiKey> apiKeys;
 
+    @Inject
     public MockApiKeyDAOImpl() {
         this.apiKeys = new HashMap<>();
     }
