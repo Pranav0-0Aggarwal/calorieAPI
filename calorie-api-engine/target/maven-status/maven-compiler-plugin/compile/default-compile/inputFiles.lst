@@ -15,4 +15,6 @@
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/resource/CalorieApiResource.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/services/CalorieApiService.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/services/ImageRequestService.java
+/Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/services/LlmService.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/services/TextRequestService.java
+/Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/services/impl/GeminiLlmService.java

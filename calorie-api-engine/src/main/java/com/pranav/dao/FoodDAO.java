@@ -14,5 +14,4 @@ public interface FoodDAO {
     boolean foodExists(String foodName);
 
     List<Food> getAllFoods();
-    List<Food> getSimilarFoods(String searchQuery);
 }

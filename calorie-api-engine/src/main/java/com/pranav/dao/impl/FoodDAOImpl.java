@@ -33,8 +33,4 @@ public class FoodDAOImpl implements FoodDAO {
         return List.of();
     }
 
-    @Override
-    public List<Food> getSimilarFoods(String searchQuery) {
-        return List.of();
-    }
 }

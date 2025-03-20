@@ -44,7 +44,7 @@ public class CalorieApiService {
                 continue;
             }
 
-            double mealSize = meal.getQuantityInGrams() / 100.0;
+            double mealSize = meal.getQuantityInGram() / 100.0;
             double calories = matchingFood.getCaloriesPer100g() * mealSize;
             double protein = matchingFood.getProteinPer100g() * mealSize;
             double carbs = matchingFood.getCarbsPer100g() * mealSize;
@@ -56,7 +56,7 @@ public class CalorieApiService {
             MealResponse mealResponse = MealResponse.builder()
                     .mealId(UUID.randomUUID().toString())
                     .mealName(meal.getFoodName())
-                    .timestamp(meal.getTimestamp())
+                    .timestamp(meal.getTimeStamp())
                     .macros(macros)
                     .userId(textRequest.getUserId())
                     .build();
@@ -98,7 +98,7 @@ public class CalorieApiService {
         return macros.toString() + " were consumed in interval starting from " +
                 start.toString() + " - " + end.toString() +
                 ". This was given for context, and the following is the query textual: " +
-                textRequest.getText() + ". Generate a Response for the given Query, don't forget to add Macros, and make it mostly focussed on Health";
+                textRequest.getText() + ". Generate a Response for the given Query, don't forget to add Macros, and make it mostly focussed on Health, ignore the food name and use the macros provided to discuss";
     }
 
     public List<MealResponse> getAllMeals() {
@@ -107,5 +107,12 @@ public class CalorieApiService {
 
     public Map<String,String> getAllMappings(){
         return searchMapper.getAllMappings();
+    }
+
+    public void addFoods(List<Food> foods) {
+        for(Food food: foods){
+            foodDAO.addFood(food);
+            log.info("{} food is added", food);
+        }
     }
 }

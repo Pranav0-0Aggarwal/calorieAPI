@@ -11,7 +11,6 @@ import com.pranav.dao.impl.MockFoodDAOImpl;
 import com.pranav.dao.impl.MockMealDAOImpl;
 import com.pranav.dao.impl.MockSearchMapperImpl;
 import com.pranav.dao.impl.MockUserDAOImpl;
-import com.pranav.resource.CalorieApiResource;
 import com.pranav.services.LlmService;
 import com.pranav.services.impl.GeminiLlmService;
 

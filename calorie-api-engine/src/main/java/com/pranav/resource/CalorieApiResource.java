@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Slf4j
 @Singleton
@@ -28,12 +29,20 @@ public class CalorieApiResource {
         this.calorieApiService = calorieApiService;
     }
 
-    @Path("/food")
+    @Path("/Addfood")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addFood(Food food) {
         calorieApiService.addFood(food);
         return Response.ok("{\"message\": \"Food is Added\"}").build();
+    }
+
+    @Path("/Addfoods")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addFood(List<Food> foods) {
+        calorieApiService.addFoods(foods);
+        return Response.ok("{\"message\": \"Foods are Added\"}").build();
     }
 
     @Path("/text")
@@ -65,6 +74,5 @@ public class CalorieApiResource {
     public Response getAllMappings(){
         return Response.ok(calorieApiService.getAllMappings()).build();
     }
-
 
 }

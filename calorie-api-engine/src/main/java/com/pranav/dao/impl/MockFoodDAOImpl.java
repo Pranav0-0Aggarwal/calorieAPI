@@ -5,10 +5,12 @@ import com.google.inject.Singleton;
 import com.pranav.dao.FoodDAO;
 import com.pranav.dao.SearchMapper;
 import com.pranav.food.Food;
+import com.pranav.services.LlmService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,11 +21,13 @@ public class MockFoodDAOImpl implements FoodDAO {
     //mapping of Id, with Food
     private final Map<String, Food> mockFoodStore;
     private final SearchMapper searchMapper;
+    private final LlmService llmService;
 
     @Inject
-    public MockFoodDAOImpl(SearchMapper searchMapper) {
+    public MockFoodDAOImpl(SearchMapper searchMapper, LlmService llmService) {
         this.searchMapper = searchMapper;
-        this.mockFoodStore = new HashMap<>();
+        this.mockFoodStore = new LinkedHashMap<>();
+        this.llmService = llmService;
     }
 
     @Override
@@ -31,7 +35,7 @@ public class MockFoodDAOImpl implements FoodDAO {
         if (searchMapper.isPresent(foodName)) {
             return mockFoodStore.get(searchMapper.getMapping(foodName));
         }
-        Food food = closestFood(foodName);
+        Food food = llmService.getClosestFood(foodName, mockFoodStore.values().stream().toList());
         searchMapper.addMapping(foodName, food.getFoodId());
         return food;
     }
@@ -65,15 +69,6 @@ public class MockFoodDAOImpl implements FoodDAO {
     @Override
     public List<Food> getAllFoods() {
         return new ArrayList<>(mockFoodStore.values());
-    }
-
-    @Override
-    public List<Food> getSimilarFoods(String searchQuery) {
-        return List.of();
-    }
-
-    private Food closestFood(String foodName) {
-        return new Food();
     }
 
 }
