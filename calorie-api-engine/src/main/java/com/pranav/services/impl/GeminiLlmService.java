@@ -81,7 +81,7 @@ public class GeminiLlmService implements LlmService {
         }
 
         for (Food food : foods) {
-            String prompt = "Is '" + foodName + "' and '" + food.getName() + "' the same food, with different names? Reply in boolean only: true/false";
+            String prompt = "Is '" + foodName + "' and '" + food.getName() + "' the similar food, with different names? Reply in boolean only: true/false";
             String response = getResponse(prompt);
 
             if (response != null && response.trim().equalsIgnoreCase("true")) {
