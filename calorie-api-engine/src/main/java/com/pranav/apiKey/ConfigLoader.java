@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class ConfigLoader {
-    private static final String API_KEY_PATH = "/Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/apiKey/gemini/apikey;
+    private static final String API_KEY_PATH = "/Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/apiKey/gemini/apikey";
 
     public static String loadApiKey() {
         try {
