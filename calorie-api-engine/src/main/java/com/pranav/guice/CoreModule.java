@@ -12,6 +12,8 @@ import com.pranav.dao.impl.MockMealDAOImpl;
 import com.pranav.dao.impl.MockSearchMapperImpl;
 import com.pranav.dao.impl.MockUserDAOImpl;
 import com.pranav.resource.CalorieApiResource;
+import com.pranav.services.LlmService;
+import com.pranav.services.impl.GeminiLlmService;
 
 public class CoreModule extends AbstractModule {
     @Override
@@ -21,5 +23,6 @@ public class CoreModule extends AbstractModule {
         bind(MealDAO.class).to(MockMealDAOImpl.class);
         bind(SearchMapper.class).to(MockSearchMapperImpl.class);
         bind(UserDAO.class).to(MockUserDAOImpl.class);
+        bind(LlmService.class).to(GeminiLlmService.class);
     }
 }
