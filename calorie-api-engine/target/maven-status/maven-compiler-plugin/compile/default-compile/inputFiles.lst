@@ -19,11 +19,13 @@
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/mapper/FoodMapper.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/mapper/MealMapper.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/mapper/UserMapper.java
+/Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/resource/AdminResource.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/resource/CalorieApiResource.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/services/CalorieApiService.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/services/ImageRequestService.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/services/LlmService.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/services/TextRequestService.java
+/Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/services/UserRegisterService.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/services/impl/GeminiLlmService.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/utils/Idutil.java
 /Users/pranav3.intern/Documents/calorieAPI/calorie-api-engine/src/main/java/com/pranav/utils/JdbiProvider.java

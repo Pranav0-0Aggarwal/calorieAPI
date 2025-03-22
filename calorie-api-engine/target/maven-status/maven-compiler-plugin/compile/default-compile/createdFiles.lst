@@ -29,3 +29,5 @@ com/pranav/App$1.class
 com/pranav/App.class
 com/pranav/guice/CoreModule.class
 com/pranav/services/impl/GeminiLlmService.class
+com/pranav/services/UserRegisterService.class
+com/pranav/resource/AdminResource.class
