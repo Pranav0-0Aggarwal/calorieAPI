@@ -1,7 +1,6 @@
 package com.pranav.resource;
 
 import com.google.inject.Inject;
-import com.pranav.food.Food;
 import com.pranav.request.TextRequest;
 import com.pranav.services.CalorieApiService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,13 +15,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Slf4j
 @Singleton
 @Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "User APIs")
 public class CalorieApiResource {
     private final CalorieApiService calorieApiService;
@@ -54,5 +51,6 @@ public class CalorieApiResource {
     public Response getAllMeals(@QueryParam("userId") String userId) {
         return Response.ok(calorieApiService.getAllMeals(userId)).build();
     }
+
 
 }

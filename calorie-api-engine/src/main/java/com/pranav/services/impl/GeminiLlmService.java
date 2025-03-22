@@ -2,7 +2,7 @@ package com.pranav.services.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pranav.apiKey.ConfigLoader;
+import com.pranav.LLMapiKey.ConfigLoader;
 import com.pranav.food.Food;
 import com.pranav.services.LlmService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +13,8 @@ import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 @Slf4j
@@ -73,23 +75,33 @@ public class GeminiLlmService implements LlmService {
 
 
     @Override
-    public Food getClosestFood(String foodName, List<Food> foods) {
+    public List<Double> getClosestFood(String foodName, List<Food> foods) {
         if (foodName == null || foods == null || foods.isEmpty()) {
             log.warn("Invalid input: foodName or foods list is null/empty");
-            return null;
+            return Collections.nCopies(foods != null ? foods.size() : 0, 0.0);
         }
 
-        for (Food food : foods) {
-            String prompt = "Is '" + foodName + "' and '" + food.getName() + "' the similar food, with different names? Reply in boolean only: true/false";
-            String response = getResponse(prompt);
+        List<Double> similarityScores = new LinkedList<>();
 
-            if (response != null && response.trim().equalsIgnoreCase("true")) {
-                log.info("{} and {} are the same thing", foodName, food.getName());
-                return food;
+        for (Food food : foods) {
+            String prompt = String.format(
+                    "Give a similarity score up to two decimal places (between 0 and 1) for the foods with names: '%s' and '%s'. Respond only with a decimal number.",
+                    food.getName(), foodName
+            );
+
+            String response = getResponse(prompt);
+            log.debug("LLM response for '{}' vs '{}': {}", food.getName(), foodName, response);
+
+            try {
+                double score = Double.parseDouble(response.trim());
+                similarityScores.add(score);
+            } catch (NumberFormatException e) {
+                log.warn("Invalid response from LLM for food '{}' (input '{}'): '{}'", food.getName(), foodName, response);
+                similarityScores.add(0.0);
             }
         }
 
-        log.info("No matching food found for: {}", foodName);
-        return null;
+        return similarityScores;
     }
+
 }

@@ -6,6 +6,7 @@ import com.pranav.dao.FoodDAO;
 import com.pranav.dao.SearchMapper;
 import com.pranav.food.Food;
 import com.pranav.services.LlmService;
+import com.pranav.utils.ClosestFinder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -17,24 +18,21 @@ import java.util.Map;
 @Singleton
 public class MockFoodDAOImpl implements FoodDAO {
 
-    //mapping of Id, with Food
     private final Map<String, Food> mockFoodStore;
     private final SearchMapper searchMapper;
-    private final LlmService llmService;
-
+    private final ClosestFinder closestFinder;
     @Inject
-    public MockFoodDAOImpl(SearchMapper searchMapper, LlmService llmService) {
+    public MockFoodDAOImpl(SearchMapper searchMapper,ClosestFinder closestFinder) {
         this.searchMapper = searchMapper;
-        this.mockFoodStore = new LinkedHashMap<>();
-        this.llmService = llmService;
-    }
+        this.closestFinder = closestFinder;
+        this.mockFoodStore = new LinkedHashMap<>();}
 
     @Override
     public Food getFoodByName(String foodName) {
         if (searchMapper.isPresent(foodName)) {
             return mockFoodStore.get(searchMapper.getMapping(foodName));
         }
-        Food food = llmService.getClosestFood(foodName, mockFoodStore.values().stream().toList());
+        Food food = closestFinder.getClosestFood(foodName, mockFoodStore.values().stream().toList());
         searchMapper.addMapping(foodName, food.getFoodId());
         return food;
     }

@@ -100,7 +100,6 @@ public class CalorieApiService {
     }
 
     public String getImageResponse(ImageRequest imageRequest) {
-        // Placeholder response
         return "This API isn't working for now";
     }
 

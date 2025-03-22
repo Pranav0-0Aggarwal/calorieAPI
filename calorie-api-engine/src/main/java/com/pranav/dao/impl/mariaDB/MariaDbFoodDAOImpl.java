@@ -8,6 +8,7 @@ import com.pranav.dao.SearchMapper;
 import com.pranav.food.Food;
 import com.pranav.mapper.FoodMapper;
 import com.pranav.services.LlmService;
+import com.pranav.utils.ClosestFinder;
 import lombok.extern.slf4j.Slf4j;
 import org.jdbi.v3.core.Jdbi;
 
@@ -20,13 +21,13 @@ public class MariaDbFoodDAOImpl implements FoodDAO {
 
     private final Provider<Jdbi> jdbiProvider;
     private final SearchMapper searchMapper;
-    private final LlmService llmService;
+    private final ClosestFinder closestFinder;
 
     @Inject
-    public MariaDbFoodDAOImpl(Provider<Jdbi> jdbiProvider, SearchMapper searchMapper, LlmService llmService) {
+    public MariaDbFoodDAOImpl(Provider<Jdbi> jdbiProvider, SearchMapper searchMapper, ClosestFinder closestFinder) {
         this.jdbiProvider = jdbiProvider;
         this.searchMapper = searchMapper;
-        this.llmService = llmService;
+        this.closestFinder = closestFinder;
     }
 
     @Override
@@ -63,7 +64,7 @@ public class MariaDbFoodDAOImpl implements FoodDAO {
         }
 
         List<Food> allFoods = getAllFoods();
-        Food closest = llmService.getClosestFood(foodName, allFoods);
+        Food closest = closestFinder.getClosestFood(foodName, allFoods);
 
         if (closest != null) {
             searchMapper.addMapping(foodName, closest.getFoodId());

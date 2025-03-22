@@ -15,7 +15,6 @@ import com.pranav.dao.impl.mariaDB.MariaDbUserDAOImpl;
 import com.pranav.dao.impl.mock.*;
 import com.pranav.services.LlmService;
 import com.pranav.services.impl.GeminiLlmService;
-import com.pranav.utils.JdbiProvider;
 import org.jdbi.v3.core.Jdbi;
 
 public class CoreModule extends AbstractModule {
