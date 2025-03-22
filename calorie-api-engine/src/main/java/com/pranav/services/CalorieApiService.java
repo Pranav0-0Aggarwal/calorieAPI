@@ -126,4 +126,8 @@ public class CalorieApiService {
             log.info("{} food is added", food);
         }
     }
+
+    public Food getFoodDetails(String foodName){
+        return foodDAO.getFoodByName(foodName);
+    }
 }

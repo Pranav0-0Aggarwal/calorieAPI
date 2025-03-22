@@ -8,7 +8,7 @@ public class Idutil {
         return "M_" + UUID.randomUUID().toString();
     }
 
-    public String generateUserId(){
+    public static String generateUserId(){
         return "U_" + UUID.randomUUID().toString();
     }
 

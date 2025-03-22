@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.pranav.food.Food;
 import com.pranav.request.TextRequest;
 import com.pranav.services.CalorieApiService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.inject.Singleton;
@@ -22,28 +23,13 @@ import java.util.List;
 @Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Tag(name = "User APIs")
 public class CalorieApiResource {
     private final CalorieApiService calorieApiService;
 
     @Inject
     public CalorieApiResource(CalorieApiService calorieApiService) {
         this.calorieApiService = calorieApiService;
-    }
-
-    @Path("/Addfood")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addFood(Food food) {
-        calorieApiService.addFood(food);
-        return Response.ok("{\"message\": \"Food is Added\"}").build();
-    }
-
-    @Path("/Addfoods")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addFood(List<Food> foods) {
-        calorieApiService.addFoods(foods);
-        return Response.ok("{\"message\": \"Foods are Added\"}").build();
     }
 
     @Path("/text")
@@ -55,11 +41,11 @@ public class CalorieApiResource {
         return Response.ok(response).build();
     }
 
-    @Path("/allFood")
+    @Path("/getFoodDetails")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response getAllFood(){
-        return Response.ok(calorieApiService.getAllFood()).build();
+    public Response getFoodDetails(@QueryParam("foodName") String foodName){
+        return Response.ok(calorieApiService.getFoodDetails(foodName)).build();
     }
 
     @Path("/allMeals")
@@ -67,13 +53,6 @@ public class CalorieApiResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getAllMeals(@QueryParam("userId") String userId) {
         return Response.ok(calorieApiService.getAllMeals(userId)).build();
-    }
-
-    @Path("/AllMappings")
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response getAllMappings(){
-        return Response.ok(calorieApiService.getAllMappings()).build();
     }
 
 }

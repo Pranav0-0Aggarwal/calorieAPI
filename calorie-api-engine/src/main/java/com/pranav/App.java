@@ -1,6 +1,7 @@
 package com.pranav;
 
 import com.pranav.guice.CoreModule;
+import com.pranav.resource.AdminResource;
 import com.pranav.resource.CalorieApiResource;
 import com.pranav.utils.JdbiProvider;
 import io.dropwizard.Application;
@@ -46,5 +47,6 @@ public class App extends Application<AppConfig> {
         jdbiProvider.setJdbi(jdbi);
 
         environment.jersey().register(guiceBundle.getInjector().getInstance(CalorieApiResource.class));
+        environment.jersey().register(guiceBundle.getInjector().getInstance(AdminResource.class));
     }
 }
