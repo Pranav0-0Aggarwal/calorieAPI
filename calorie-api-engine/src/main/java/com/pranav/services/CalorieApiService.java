@@ -10,13 +10,13 @@ import com.pranav.meal.Meal;
 import com.pranav.meal.MealResponse;
 import com.pranav.request.ImageRequest;
 import com.pranav.request.TextRequest;
+import com.pranav.utils.Idutil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Slf4j
 public class CalorieApiService {
@@ -54,7 +54,7 @@ public class CalorieApiService {
             Macros macros = new Macros(calories, protein, carbs, fats, sodium);
 
             MealResponse mealResponse = MealResponse.builder()
-                    .mealId(UUID.randomUUID().toString())
+                    .mealId(Idutil.generateMealId())
                     .mealName(meal.getFoodName())
                     .timestamp(meal.getTimeStamp())
                     .macros(macros)
@@ -81,6 +81,7 @@ public class CalorieApiService {
     }
 
     public void addFood(Food food) {
+        food.setFoodId(Idutil.generateFoodId());
         foodDAO.addFood(food);
         log.info("{} food is added", food);
     }
@@ -111,6 +112,7 @@ public class CalorieApiService {
 
     public void addFoods(List<Food> foods) {
         for(Food food: foods){
+            food.setFoodId(Idutil.generateFoodId());
             foodDAO.addFood(food);
             log.info("{} food is added", food);
         }

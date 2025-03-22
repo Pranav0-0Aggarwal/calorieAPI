@@ -6,11 +6,7 @@ import com.pranav.dao.FoodDAO;
 import com.pranav.dao.MealDAO;
 import com.pranav.dao.SearchMapper;
 import com.pranav.dao.UserDAO;
-import com.pranav.dao.impl.MockApiKeyDAOImpl;
-import com.pranav.dao.impl.MockFoodDAOImpl;
-import com.pranav.dao.impl.MockMealDAOImpl;
-import com.pranav.dao.impl.MockSearchMapperImpl;
-import com.pranav.dao.impl.MockUserDAOImpl;
+import com.pranav.dao.impl.mock.*;
 import com.pranav.services.LlmService;
 import com.pranav.services.impl.GeminiLlmService;
 

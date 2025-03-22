@@ -1,4 +1,4 @@
-package com.pranav.dao.impl;
+package com.pranav.dao.impl.mock;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

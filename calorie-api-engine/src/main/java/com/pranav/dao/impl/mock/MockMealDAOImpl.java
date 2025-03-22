@@ -1,13 +1,12 @@
-package com.pranav.dao.impl;
+package com.pranav.dao.impl.mock;
+
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.pranav.dao.MealDAO;
 import com.pranav.macros.Macros;
-import com.pranav.meal.Meal;
 import com.pranav.meal.MealResponse;
 import lombok.extern.slf4j.Slf4j;
-import net.sourceforge.argparse4j.impl.type.StringArgumentType;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

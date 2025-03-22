@@ -1,13 +1,16 @@
 package com.pranav.food;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Food {
+
     private String foodId;
     private String name;
     private double caloriesPer100g;

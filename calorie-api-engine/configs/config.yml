@@ -20,3 +20,14 @@ swagger:
   resourcePackage: com.pranav.resource
   title: Calorie Tracker APIs
   description: APIs for adding foods
+
+database:
+  driverClass: org.mariadb.jdbc.Driver
+  user: root
+  password:
+  url: jdbc:mariadb://localhost:3307/calorie_tracker
+  properties:
+    charSet: UTF-8
+    useSSL: false
+    allowPublicKeyRetrieval: true
+    serverTimezone: UTC

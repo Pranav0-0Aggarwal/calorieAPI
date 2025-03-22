@@ -1,10 +1,9 @@
-package com.pranav.dao.impl;
+package com.pranav.dao.impl.mock;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.pranav.dao.UserDAO;
 import com.pranav.user.User;
-import org.checkerframework.checker.index.qual.SearchIndexFor;
 
 import java.util.HashMap;
 import java.util.Map;
