@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MealDAO {
     void addMeal(MealResponse mealResponse);
-    List<MealResponse> getMeals();
-    List<MealResponse> getMealsBetween(LocalDateTime start, LocalDateTime end);
-    Macros getMacrosBetween(LocalDateTime start, LocalDateTime end);
+    List<MealResponse> getMeals(String userId);
+    List<MealResponse> getMealsBetween(String userId,LocalDateTime start, LocalDateTime end);
+    Macros getMacrosBetween(String userId,LocalDateTime start, LocalDateTime end);
 }

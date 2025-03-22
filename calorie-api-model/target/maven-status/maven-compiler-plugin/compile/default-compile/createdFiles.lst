@@ -1,9 +1,13 @@
 com/pranav/request/TextRequest.class
-com/pranav/Main.class
 com/pranav/user/User.class
+com/pranav/food/Food$FoodBuilder.class
+com/pranav/meal/Meal.class
+com/pranav/Main.class
 com/pranav/api/ApiKey.class
 com/pranav/meal/MealResponse.class
+com/pranav/request/TextRequest$TextRequestBuilder.class
+com/pranav/user/User$UserBuilder.class
 com/pranav/macros/Macros.class
 com/pranav/food/Food.class
-com/pranav/meal/Meal.class
+com/pranav/meal/MealResponse$MealResponseBuilder.class
 com/pranav/request/ImageRequest.class

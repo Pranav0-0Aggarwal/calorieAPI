@@ -12,6 +12,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -64,8 +65,8 @@ public class CalorieApiResource {
     @Path("/allMeals")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response getAllMeals(){
-        return Response.ok(calorieApiService.getAllMeals()).build();
+    public Response getAllMeals(@QueryParam("userId") String userId) {
+        return Response.ok(calorieApiService.getAllMeals(userId)).build();
     }
 
     @Path("/AllMappings")

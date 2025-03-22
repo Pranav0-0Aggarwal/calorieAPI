@@ -3,6 +3,7 @@ package com.pranav;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import in.vectorpro.dropwizard.swagger.SwaggerBundleConfiguration;
 import io.dropwizard.Configuration;
+import io.dropwizard.db.DataSourceFactory;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,4 +22,8 @@ public class AppConfig extends Configuration {
     @NotNull
     private SwaggerBundleConfiguration swagger;
 
+    @Valid
+    @NotNull
+    @JsonProperty("database")
+    private DataSourceFactory dataSourceFactory = new DataSourceFactory();
 }

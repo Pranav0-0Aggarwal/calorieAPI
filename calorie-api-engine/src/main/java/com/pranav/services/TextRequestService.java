@@ -99,7 +99,7 @@ public class TextRequestService {
             return "Invalid input. Please provide a valid query.";
         }
 
-        String prompt = "For the following query, answer as a dietitian. " +
+        String prompt = "Keep it concise, For the following query, answer as a dietitian. " +
                 "Try to make use of all the details provided and don't use any previous context:\n\n" +
                 textRequest.getText();
 

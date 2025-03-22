@@ -29,7 +29,6 @@ public class GeminiLlmService implements LlmService {
             HttpPost post = new HttpPost(GEMINI_URL);
             post.setHeader("Content-Type", "application/json");
 
-            // Correct JSON payload structure
             String requestBody = "{ \"contents\": [ { \"parts\": [ { \"text\": \"" + text + "\" } ] } ] }";
 
             post.setEntity(new StringEntity(requestBody, StandardCharsets.UTF_8));

@@ -1,6 +1,7 @@
 package com.pranav.dao.impl.mariaDB;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.pranav.dao.FoodDAO;
 import com.pranav.dao.SearchMapper;
@@ -17,20 +18,20 @@ import java.util.Optional;
 @Singleton
 public class MariaDbFoodDAOImpl implements FoodDAO {
 
-    private final Jdbi jdbi;
+    private final Provider<Jdbi> jdbiProvider;
     private final SearchMapper searchMapper;
     private final LlmService llmService;
 
     @Inject
-    public MariaDbFoodDAOImpl(Jdbi jdbi, SearchMapper searchMapper, LlmService llmService) {
-        this.jdbi = jdbi;
+    public MariaDbFoodDAOImpl(Provider<Jdbi> jdbiProvider, SearchMapper searchMapper, LlmService llmService) {
+        this.jdbiProvider = jdbiProvider;
         this.searchMapper = searchMapper;
         this.llmService = llmService;
     }
 
     @Override
     public void addFood(Food food) {
-        jdbi.useHandle(handle ->
+        jdbiProvider.get().useHandle(handle ->
                 handle.createUpdate("INSERT INTO foods (food_id, name, calories, protein, carbs, fats) " +
                                 "VALUES (:foodId, :name, :calories, :protein, :carbs, :fats)")
                         .bind("foodId", food.getFoodId())
@@ -75,7 +76,7 @@ public class MariaDbFoodDAOImpl implements FoodDAO {
 
     @Override
     public Food getFoodById(String foodId) {
-        Optional<Food> result = jdbi.withHandle(handle ->
+        Optional<Food> result = jdbiProvider.get().withHandle(handle ->
                 handle.createQuery("SELECT * FROM foods WHERE food_id = :foodId")
                         .bind("foodId", foodId)
                         .map(new FoodMapper())
@@ -91,7 +92,7 @@ public class MariaDbFoodDAOImpl implements FoodDAO {
 
     @Override
     public List<Food> getAllFoods() {
-        return jdbi.withHandle(handle ->
+        return jdbiProvider.get().withHandle(handle ->
                 handle.createQuery("SELECT * FROM foods")
                         .map(new FoodMapper())
                         .list()

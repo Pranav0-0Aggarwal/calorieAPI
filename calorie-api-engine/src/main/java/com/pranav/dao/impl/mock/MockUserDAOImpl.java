@@ -18,6 +18,11 @@ public class MockUserDAOImpl implements UserDAO {
     }
 
     @Override
+    public boolean isValidUser(String userId) {
+        return mockUsersStore.containsKey(userId);
+    }
+
+    @Override
     public String getApiKeyByUserId(String userId) {
         return mockUsersStore.get(userId).getApiKey().getKey();
     }
@@ -26,4 +31,5 @@ public class MockUserDAOImpl implements UserDAO {
     public void addUser(User user) {
         mockUsersStore.put(user.getUserId(), user);
     }
+
 }

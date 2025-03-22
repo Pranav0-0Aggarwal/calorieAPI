@@ -33,12 +33,12 @@ public class MockMealDAOImpl implements MealDAO {
     }
 
     @Override
-    public List<MealResponse> getMeals() {
+    public List<MealResponse> getMeals(String userId) {
         return new ArrayList<>(mockMealsStore.values());
     }
 
     @Override
-    public List<MealResponse> getMealsBetween(LocalDateTime start, LocalDateTime end) {
+    public List<MealResponse> getMealsBetween(String userId, LocalDateTime start, LocalDateTime end) {
         List<MealResponse> filteredMeals = new ArrayList<>();
 
         for (MealResponse meal : mockMealsStore.values()) {
@@ -55,10 +55,10 @@ public class MockMealDAOImpl implements MealDAO {
     }
 
     @Override
-    public Macros getMacrosBetween(LocalDateTime start, LocalDateTime end) {
+    public Macros getMacrosBetween(String userId,LocalDateTime start, LocalDateTime end) {
         Macros totalMacros = new Macros(0, 0, 0, 0, 0);
 
-        List<MealResponse> meals = getMealsBetween(start, end);
+        List<MealResponse> meals = getMealsBetween(userId,start, end);
 
         for (MealResponse meal : meals) {
             Macros mealMacros = meal.getMacros();

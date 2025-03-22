@@ -24,7 +24,7 @@ swagger:
 database:
   driverClass: org.mariadb.jdbc.Driver
   user: root
-  password:
+  password: ""
   url: jdbc:mariadb://localhost:3307/calorie_tracker
   properties:
     charSet: UTF-8

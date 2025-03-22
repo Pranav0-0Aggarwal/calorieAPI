@@ -1,6 +1,7 @@
 package com.pranav.dao.impl.mariaDB;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.pranav.dao.MealDAO;
 import com.pranav.macros.Macros;
@@ -17,16 +18,18 @@ import java.util.List;
 @Singleton
 public class MariaDbMealDAOImpl implements MealDAO {
 
-    private final Jdbi jdbi;
+
+    private final Provider<Jdbi> jdbiProvider;
 
     @Inject
-    public MariaDbMealDAOImpl(Jdbi jdbi) {
-        this.jdbi = jdbi;
+    public MariaDbMealDAOImpl(Provider<Jdbi> jdbiProvider) {
+        this.jdbiProvider = jdbiProvider;
     }
+
 
     @Override
     public void addMeal(MealResponse meal) {
-        jdbi.useHandle(handle ->
+        jdbiProvider.get().useHandle(handle ->
                 handle.createUpdate("INSERT INTO meals (meal_id, user_id, meal_name, timestamp, calorie, protein, carbs, fats, sodium) " +
                                 "VALUES (:mealId, :userId, :mealName, :timestamp, :calorie, :protein, :carbs, :fats, :sodium)")
                         .bind("mealId", meal.getMealId())
@@ -44,17 +47,17 @@ public class MariaDbMealDAOImpl implements MealDAO {
     }
 
     @Override
-    public List<MealResponse> getMeals() {
-        return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM meals")
+    public List<MealResponse> getMeals(String userId) {
+        return jdbiProvider.get().withHandle(handle ->
+                handle.createQuery("SELECT * FROM meals WHERE user_id = :userId")
+                        .bind("userId", userId)
                         .map(new MealMapper())
                         .list()
         );
     }
-
     @Override
-    public List<MealResponse> getMealsBetween(LocalDateTime start, LocalDateTime end) {
-        List<MealResponse> meals = getMeals();
+    public List<MealResponse> getMealsBetween(String userId, LocalDateTime start, LocalDateTime end) {
+        List<MealResponse> meals = getMeals(userId);
         List<MealResponse> filteredMeals = new ArrayList<>();
 
         for (MealResponse meal : meals) {
@@ -71,10 +74,10 @@ public class MariaDbMealDAOImpl implements MealDAO {
     }
 
     @Override
-    public Macros getMacrosBetween(LocalDateTime start, LocalDateTime end) {
+    public Macros getMacrosBetween(String userId, LocalDateTime start, LocalDateTime end) {
         Macros totalMacros = new Macros(0, 0, 0, 0, 0);
 
-        List<MealResponse> meals = getMealsBetween(start, end);
+        List<MealResponse> meals = getMealsBetween(userId, start, end);
 
         for (MealResponse meal : meals) {
             Macros m = meal.getMacros();

@@ -1,6 +1,7 @@
 package com.pranav.dao.impl.mariaDB;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.pranav.dao.UserDAO;
 import com.pranav.user.User;
@@ -11,16 +12,29 @@ import org.jdbi.v3.core.Jdbi;
 @Singleton
 public class MariaDbUserDAOImpl implements UserDAO {
 
-    private final Jdbi jdbi;
+    private final Provider<Jdbi> jdbiProvider;
 
     @Inject
-    public MariaDbUserDAOImpl(Jdbi jdbi) {
-        this.jdbi = jdbi;
+    public MariaDbUserDAOImpl(Provider<Jdbi> jdbiProvider) {
+        this.jdbiProvider = jdbiProvider;
     }
+
+
+    @Override
+    public boolean isValidUser(String userId) {
+        return jdbiProvider.get().withHandle(handle ->
+                handle.createQuery("SELECT user_id FROM users WHERE user_id = :userId")
+                        .bind("userId", userId)
+                        .mapTo(String.class)
+                        .findOne()
+                        .isPresent()
+        );
+    }
+
 
     @Override
     public String getApiKeyByUserId(String userId) {
-        return jdbi.withHandle(handle ->
+        return jdbiProvider.get().withHandle(handle ->
                 handle.createQuery("SELECT api_key FROM users WHERE user_id = :userId")
                         .bind("userId", userId)
                         .mapTo(String.class)
@@ -31,7 +45,7 @@ public class MariaDbUserDAOImpl implements UserDAO {
 
     @Override
     public void addUser(User user) {
-        jdbi.useHandle(handle ->
+        jdbiProvider.get().useHandle(handle ->
                 handle.createUpdate("INSERT INTO users (user_id, name, api_key) VALUES (:userId, :name, :apiKey)")
                         .bind("userId", user.getUserId())
                         .bind("name", user.getName())

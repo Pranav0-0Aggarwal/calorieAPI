@@ -14,4 +14,5 @@ public class ConfigLoader {
             throw new RuntimeException("Failed to load API key from file: " + API_KEY_PATH, e);
         }
     }
+
 }

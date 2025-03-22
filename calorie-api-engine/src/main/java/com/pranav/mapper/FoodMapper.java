@@ -14,7 +14,7 @@ public class FoodMapper implements RowMapper<Food> {
                 .foodId(rs.getString("food_id"))
                 .name(rs.getString("name"))
                 .caloriesPer100g(rs.getDouble("calories_per100g"))
-                .carbsPer100g(rs.getDouble("carbohydrates_per100g"))
+                .carbsPer100g(rs.getDouble("carbs_per100g"))
                 .fatsPer100g(rs.getDouble("fats_per100g"))
                 .proteinPer100g(rs.getDouble("protein_per100g"))
                 .sodiumPer100g(rs.getDouble("sodium_per100g"))
