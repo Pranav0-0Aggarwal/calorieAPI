@@ -33,14 +33,15 @@ public class MariaDbFoodDAOImpl implements FoodDAO {
     @Override
     public void addFood(Food food) {
         jdbiProvider.get().useHandle(handle ->
-                handle.createUpdate("INSERT INTO foods (food_id, name, calories, protein, carbs, fats) " +
-                                "VALUES (:foodId, :name, :calories, :protein, :carbs, :fats)")
+                handle.createUpdate("INSERT INTO foods (food_id, name, calories_Per100g, protein_Per100g, carbs_Per100g, fats_Per100g, sodium_Per100g) " +
+                                "VALUES (:foodId, :name, :calories, :protein, :carbs, :fats, :sodium)")
                         .bind("foodId", food.getFoodId())
                         .bind("name", food.getName())
                         .bind("calories", food.getCaloriesPer100g())
                         .bind("protein", food.getProteinPer100g())
                         .bind("carbs", food.getCarbsPer100g())
                         .bind("fats", food.getFatsPer100g())
+                        .bind("sodium", food.getSodiumPer100g())
                         .execute()
         );
         searchMapper.addMapping(food.getName(), food.getFoodId());
